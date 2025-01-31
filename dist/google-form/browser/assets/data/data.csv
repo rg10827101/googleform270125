@@ -1,0 +1,5 @@
+sr,name,data_type,comp_type,error_message
+1,email,string,email,Email is wrong
+2,title,string,text,Title is wrong
+3,male,boolean,radio,Name is wrong
+4,description,string,textarea,write in 100 char

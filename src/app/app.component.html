@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let field of formFields">
+    <ng-template [ngIf]="field.data_type && field.name !== ''">
+      <div [ngSwitch]="field.comp_type">
+        <div *ngSwitchCase="'email'">
+          <label>{{ field.name | titlecase }}</label>
+          <input type="email" [formControlName]="field.name">
+          <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+            <span>{{ field.error_message }}</span>
+          </div>
+        </div>
+  
+        <div *ngSwitchCase="'text'">
+          <label>{{ field.name | titlecase }}</label>
+          <input type="text" [formControlName]="field.name">
+          <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+            <span>{{ field.error_message }}</span>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'textarea'">
+          <label>{{ field.name | titlecase }}</label>
+          <textarea [formControlName]="field.name"></textarea>
+          <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+            <span>{{ field.error_message }}</span>
+          </div>
+        </div>
+        
+        <div *ngSwitchCase="'radio'">
+          <label>{{ field.name | titlecase }}</label>
+          <input type="radio" [formControlName]="field.name">
+          <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+            <span>{{ field.error_message }}</span>
+          </div>
+        </div>
+        
+        <!-- Add more cases as needed -->
+  
+        <div *ngSwitchDefault>
+          <label>{{ field.name | titlecase }}</label>
+          <input type="text" [formControlName]="field.name">
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
